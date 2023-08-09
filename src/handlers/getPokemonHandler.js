@@ -1,4 +1,5 @@
 import dom from '../dom.js';
+import pokemonData from '../data.js';
 import getPokemonById from '../../apis/getPokemonById.js';
 import createPokemon from '../components/createPokemon.js';
 import updatePokemon from '../components/updatePokemon.js';
@@ -6,7 +7,12 @@ import updatePokemon from '../components/updatePokemon.js';
 const getPokemonHandler = async () => {
     const pokemonExist = document.getElementById('container');
 
+    // if pokemonData.id is the same return
     const id = Number(dom.input.value);
+    if (pokemonData.id === id) {
+        return;
+    }
+
     if (Number.isNaN(id) || id <= 0) {
         dom.error.innerText = 'Please enter a valid Pokémon ID.';
         dom.root.append(dom.error);
@@ -38,6 +44,9 @@ const getPokemonHandler = async () => {
     } else {
         updatePokemon(data);
     }
+
+    // add id to data
+    pokemonData.id = id;
 };
 
 export default getPokemonHandler;
