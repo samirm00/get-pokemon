@@ -1,21 +1,20 @@
 import createAbilitiesList from './createAbilitiesList.js';
 
-const updatePokemon = (pokemonData) => {
-    const container = document.getElementById('container');
+const updatePokemon = (pokemonDom, pokemonData) => {
     // update name
-    const name = document.getElementById('name');
+    const name = pokemonDom.querySelector('#name');
     name.innerText = pokemonData.name;
 
     // update img
-    const img = document.getElementById('img');
+    const img = pokemonDom.querySelector('#img');
     img.src = pokemonData.sprites.front_default;
     img.alt = `${pokemonData.name} Image`;
 
     const abilitiesList = createAbilitiesList(pokemonData.abilities);
-    const oldList = document.getElementById('ability-list');
+    const oldList = pokemonDom.querySelector('#ability-list');
     oldList.replaceWith(abilitiesList);
 
-    return container;
+    return pokemonDom;
 };
 
 export default updatePokemon;

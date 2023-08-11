@@ -14,12 +14,12 @@ const getPokemonHandler = async () => {
     }
 
     if (Number.isNaN(id) || id <= 0) {
+        pokemonData.id = null;
         dom.error.innerText = 'Please enter a valid Pokémon ID.';
         dom.root.append(dom.error);
         if (pokemonExist) {
             pokemonExist.remove();
         }
-
         return;
     }
 
@@ -32,7 +32,6 @@ const getPokemonHandler = async () => {
         if (pokemonExist) {
             pokemonExist.remove();
         }
-
         return;
     }
 
@@ -42,7 +41,7 @@ const getPokemonHandler = async () => {
         const pokemonDom = createPokemon(data);
         dom.root.append(pokemonDom);
     } else {
-        updatePokemon(data);
+        updatePokemon(pokemonExist, data);
     }
 
     // add id to data

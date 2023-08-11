@@ -1,5 +1,5 @@
 const pokemonData = {
-    pokemonId: null,
+    id: null,
 };
 
 export default pokemonData;

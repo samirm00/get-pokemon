@@ -2,11 +2,20 @@
  * @jest-environment jsdom
  */
 
+import createPokemon from './createPokemon.js';
 import updatePokemon from './updatePokemon.js';
 
 describe('createPokemon', () => {
-    let container, firstChild, secondChild, thirdChild, forthChild;
     const pokemonData = {
+        name: 'ekans',
+        sprites: { front_default: 'image_url' },
+        abilities: [
+            { ability: { name: 'intimidate' } },
+            { ability: { name: 'shed-skin' } },
+        ],
+    };
+
+    const pokemonDataUpdate = {
         name: 'Pikachu',
         sprites: { front_default: 'image_url' },
         abilities: [
@@ -15,23 +24,12 @@ describe('createPokemon', () => {
         ],
     };
 
-    beforeEach(() => {
-        // Setup initial DOM
-        document.body.innerHTML = `
-          <div class="pokemon-container" id="container">
-            <h2 id="name">Old Name</h2>
-            <img id="img" src="old_image_url" alt="Old Image">
-            <h3>Abilities:</h3>
-            <ul id="ability-list"></ul>
-          </div>
-        `;
-
-        container = updatePokemon(pokemonData);
-        firstChild = container.children[0];
-        secondChild = container.children[1];
-        thirdChild = container.children[2];
-        forthChild = container.children[3];
-    });
+    const pokemonDom = createPokemon(pokemonData);
+    const container = updatePokemon(pokemonDom, pokemonDataUpdate);
+    const firstChild = container.children[0];
+    const secondChild = container.children[1];
+    const thirdChild = container.children[2];
+    const forthChild = container.children[3];
 
     test('container nodeName -> DIV', () => {
         expect(container.nodeName).toEqual('DIV');
